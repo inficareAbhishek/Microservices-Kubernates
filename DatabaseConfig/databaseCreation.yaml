@@ -1,0 +1,31 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: database-job
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      containers:
+        - command:
+            - psql
+            - -h
+            - $(POSTGRES_HOST)
+            - -U
+            - $(POSTGRES_USER)
+            - -d
+            - $(POSTGRES_DB)
+            - -f
+            - /docker-entrypoint-initdb.d/tableCreate.sql
+          env:
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: POSTGRES_PASSWORD
+                  name: secret
+          envFrom:
+            - secretRef:
+                name: secret
+          image: abhi9891/employee_db
+          name: create-employee-table
+      restartPolicy: Never
