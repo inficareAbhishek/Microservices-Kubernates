@@ -37,6 +37,7 @@ These prerequisites should be installed on your system to ensure a smooth and su
    kubectl apply -f DatabaseConfig/databaseSecret.yaml
    kubectl apply -f DatabaseConfig/databaseConfig.yaml
    kubectl apply -f DatabaseConfig/databaseDeployment.yaml
+   kubectl apply -f databaseCreation.yaml
 ```
 
 ```shell
@@ -45,6 +46,19 @@ These prerequisites should be installed on your system to ensure a smooth and su
    kubectl apply -f APIConfig/apiConfig.yaml
    kubectl apply -f APIConfig/apiDeployment.yaml
 ```
+
+5. Check for the service
+ ```shell
+   kubectl get po
+ ```
+
+6. move to APIConfig directory and run below command
+
+   ```shell
+   kubectl apply -f apiSecrets.yaml
+   kubectl apply -f apiConfig.yaml
+   kubectl apply -f apiDeployment.yaml
+   ```
 
 ## Usage
 
