@@ -63,7 +63,7 @@ These prerequisites should be installed on your system to ensure a smooth and su
 ``` shell
    http://127.0.0.1:49677/employees
  ```
- Above might not give any result, so please hit the below post url on the postman with the body given:
+ Above might give empty result, so please hit the below post url on the postman with the body given:
  http://127.0.0.1:49677/employees/save
  
  {
@@ -73,8 +73,9 @@ These prerequisites should be installed on your system to ensure a smooth and su
 }
 
 ## Cleanup
-Please ensure to clin up the process initiated with the below commands:
+Please ensure to clean up the process initiated with the below commands:
 
 ``` shell
    kubectl delete all --all
+   minikube stop
 ```
