@@ -71,27 +71,12 @@ spec:
                   key: POSTGRES_PASSWORD
                   name: secret
           volumeMounts:
-            - mountPath: /docker-entrypoint-initdb.d
-              name: initializer-script
+            - mountPath: /var/lib/postgresql/data
+              name: employee-persistent-volume
       volumes:
-        - name: initializer-script
-          configMap:
-            name: initializer-script-configmap
-
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: initializer-script-configmap
-data:
-  init-script.sql: |
-    CREATE TABLE IF NOT EXISTS employee (
-      id SERIAL PRIMARY KEY,
-      name TEXT,
-      age INT,
-      role TEXT
-    );
-
+        - name: employee-persistent-volume
+          persistentVolumeClaim:
+            claimName: employee-persistent-volume-claim
 ---
 
 apiVersion: v1
